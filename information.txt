@@ -1,0 +1,13 @@
+// SSH - 22   Secure shell
+// SFTP - 22  Secure file transfer protocol
+// FTP - 21   File transfer protocol   
+// HTTP - 80
+// HTTPS - 443
+
+// MYSQL - 3306
+
+
+// 127.0.0.1   localhost
+
+127.0.0.1:3000
+localhost:3000
