@@ -1,0 +1,24 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "ownerId": "1",
+            "status": "paid"
+        },
+        {
+            "id": 1,
+            "ownerId": "2",
+            "status": "pending"
+        },
+        {
+            "id": 1,
+            "ownerId": "3",
+            "status": "paid"
+        },
+        {
+            "id": 1,
+            "ownerId": "4",
+            "status": "pending"
+        }
+    ]
+}
