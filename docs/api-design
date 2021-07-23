@@ -1,0 +1,51 @@
+
+Admin part
+POST /auth/register/admin
+GET /users - admin only
+POST /categories - admin
+
+
+User part
+Authorization controller
+
+POST /auth/login
+POST /auth/register
+
+
+Users controller
+POST /users/:id/image  login required, self
+PATCH /users/:id -  login required, self
+GET /users/:id - login required
+
+
+Products controller
+POST /products
+PATCH /products/:id - check owner
+POST /products/:id/images -  check owner
+DELETE /products/:id
+GET /products (pagination)
+GET /users/:id/products (pagination)
+GET /products/:id
+GET /categories  (pagination)
+GET /categories/:id 
+
+
+
+Card controller
+POST /cards
+PATCH /cards/:id
+
+Order controller
+POST /order
+DELETE /orders/:id
+GET /orders/:id
+GET /orders (gets user orders only)
+
+Favorites controller
+POST /favorites/products
+GET /favorites/products (pagination)
+DELETE /favorites/products/:id
+
+
+	
+git add 
