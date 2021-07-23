@@ -4,6 +4,7 @@ const app = express();
 const PORT = '3000';
 let users = require('./storage/users.json');
 let products = require("./storage/product.json");
+let orders = require('./storage/orders.json');
 
  app.get("/message",(req,res)=>{
  res.status(messages.status).send(messages.message);
@@ -11,6 +12,10 @@ let products = require("./storage/product.json");
 
 app.get('/users', (req, res) => {
     res.status(200).send(users)
+})
+
+app.get('/orders', (req,res)=> {
+    res.send(oreders)
 })
 
 app.get("/products", (req, res) => {
