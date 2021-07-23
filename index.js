@@ -10,11 +10,6 @@ let products = require("./storage/product.json");
  res.status(messages.status).send(messages.message);
 });
 
-
-app.get("/asdasdasd",(req,res)=>{
-    res.status(messages.status).send(messages.message);
-   });
-
 app.get('/users', (req, res) => {
     res.status(200).send(users)
 })
