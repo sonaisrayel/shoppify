@@ -18,3 +18,4 @@ app.get("/products", (req, res) => {
 });
 
 app.listen(PORT, console.log(`Server listen to port ${PORT}`))
+
