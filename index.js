@@ -2,12 +2,16 @@ const express = require('express');
 const messages = require("./errors/message");
 const app = express();
 const PORT = '3000';
-let users = require('./storage/users.json');
+ let users = require('./storage/users.json');
+
 let products = require("./storage/product.json");
+
+
 
 let orders = require('./storage/orders.json');
 
 let category = require("./storage/category.json")
+
 
 
 
