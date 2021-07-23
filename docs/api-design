@@ -45,7 +45,5 @@ Favorites controller
 POST /favorites/products
 GET /favorites/products (pagination)
 DELETE /favorites/products/:id
-
-
 	
 git add 
