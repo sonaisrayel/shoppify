@@ -44,6 +44,12 @@ app.get("/orders/1", (req, res) => {
     res.status(200).send(orders[0]);
 });
 
+app.patch("/orders/:id", (req, res) => {
+    const { id } = req.params;
+    orders.orders.find(order => order.id == id).name = "new name";
+    res.status(200).send(orders);
+});
+
 //CATEGORY ROUTES
 app.get('/categories', (req, res) => {
     res.status(200).send(categories)
