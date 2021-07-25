@@ -1,5 +1,4 @@
-{
-    "products": [
+[
         {
             "id":1,
             "Name": "Cheese",
@@ -37,4 +36,3 @@
             "Category": "Food"
         }
     ]
-}
