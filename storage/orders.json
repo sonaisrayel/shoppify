@@ -1,5 +1,5 @@
-{
-    "orders": [
+
+[
         {
             "id": 1,
             "name":"iphone",
@@ -25,4 +25,3 @@
             "status": "pending"
         }
     ]
-}

@@ -5,7 +5,9 @@ const config = require('config');
 const products = require("./storage/product.json");
 const orders = require("./storage/orders.json");
 const categories = require("./storage/category.json");
-const users = require('./storage/users.json').users;
+const users = require('./storage/users.json');
+
+
 const PORT = config.get('PORT');
 const app = express();
 
@@ -27,10 +29,11 @@ app.get("/users/:userId", (req, res) => {
 app.get("/products", (req, res) => {
     res.status(200).send(products);
 });
-app.delete("/product/:id", (req, res) => {
+
+app.delete("/products/:productId", (req, res) => {
     const { id } = req.params;
-    let product = products.products.find(product => product.id == id);
-    products.products.splice(id-1,1);
+    let product = products.find(product => product.id == productId);
+    products.splice(id-1,1);
     res.status(200).send(product);
 });
 
@@ -46,7 +49,7 @@ app.get("/orders/1", (req, res) => {
 
 app.patch("/orders/:id", (req, res) => {
     const { id } = req.params;
-    orders.orders.find(order => order.id == id).name = "new name";
+    orders.find(order => order.id == id).name = "new name";
     res.status(200).send(orders);
 });
 
@@ -55,16 +58,12 @@ app.get('/categories', (req, res) => {
     res.status(200).send(categories)
 })
 
-app.get('/categories/:catid', (req, res) => {
+app.get('/categories/:catId', (req, res) => {
     const { catid } = req.params;
-    const category = categories.categories.find(category => category.id == catid);
+    const category = categories.find(category => category.id == catId);
     res.status(200).send(category)
 });
 
-
-app.get("/message", (req, res) => {
-    res.status(messages.status).send(messages.message);
-});
 
 app.listen(PORT, console.log(`Server listen to port ${PORT}`))
 
