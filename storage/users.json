@@ -1,5 +1,4 @@
-{
-    "users": [
+[
         {
             "id": "1",
             "name": "Tiger Nixon",
@@ -36,4 +35,3 @@
             "profile_image": ""
         }
     ]
-}
