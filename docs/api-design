@@ -4,7 +4,6 @@ POST /auth/register/admin
 GET /users - admin only
 POST /categories - admin
 
-
 User part
 Authorization controller
 
@@ -28,8 +27,6 @@ GET /users/:id/products (pagination)
 GET /products/:id
 GET /categories  (pagination)
 GET /categories/:id 
-
-
 
 Card controller
 POST /cards
