@@ -1,5 +1,20 @@
 const express = require('express');
 const app = express();
+const PORT = '3000';
+let users = require('./storage/users.json');
+let products = require("./storage/product.json");
+let orders = require("./storage/orders.json");
+app.get("./message", (req, res) => {
+    res.status(messages.status).send(messages.message);
+});
+
+app.get('./users', (req, res) => {
+    res.status(200).send(users)
+})
+app.get("./orders/1", (req, res) => {
+    res.status(200).send(orders[0]);
+});
+
 const config = require('config');
 const products = require("./storage/product.json");
 const orders = require('./storage/orders.json');
@@ -16,6 +31,7 @@ app.get('/orders', (req, res) => {
 })
 
 //localhost:3000/products
+
 app.get("/products", (req, res) => {
     res.status(200).send(products);
 });
