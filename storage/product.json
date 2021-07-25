@@ -1,31 +1,37 @@
 {
     "products": [
         {
+            "id":1,
             "Name": "Cheese",
             "Price": 2.50,
             "Category": "Food"
         },
         {
+            "id":2,
             "Name": "Crisps",
             "Price": 3,
             "Category": "Food"
         },
         {
+            "id":3,
             "Name": "Pizza",
             "Price": 4,
             "Location": "Refrigerated foods"
         },
         {
+            "id":4,
             "Name": "Chocolate",
             "Price": 1.50,
             "Category": "Food"
         },
         {
+            "id":5,
             "Name": "Self-raising flour",
             "Price": 1.50,
             "Category": "Food"
         },
         {
+            "id":6,
             "Name": "Ground almonds",
             "Price": 3,
             "Category": "Food"
