@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/sonaisrayel/shoppify#readme",
   "dependencies": {
+    "config": "^3.3.6",
     "express": "^4.17.1"
   },
   "devDependencies": {
