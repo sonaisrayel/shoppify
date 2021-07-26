@@ -58,6 +58,5 @@ app.get('/categories/:catid', (req, res) => {
     res.status(200).send(category)
 });
 
-
 app.listen(PORT, console.log(`Server listen to port ${PORT}`))
 
