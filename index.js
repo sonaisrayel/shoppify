@@ -26,7 +26,9 @@ app.get("/users/:userId", (req, res) => {
 });
 
 //PRODUCTS ROUTES
-app.get("/products", (req, res) => {
+app.get("/products/:productId", (req, res) => {
+    const { productId } = req.params;
+    const product = products.find(product => product.id === productId);
     res.status(200).send(products);
 });
 
