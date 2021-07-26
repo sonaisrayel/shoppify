@@ -30,6 +30,6 @@
     "nodemon": "^2.0.12"
   },
   "directories": {
-    "doc": "docs"
+    "documentation": "docs"
   }
 }
