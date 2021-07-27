@@ -2,8 +2,6 @@ const express = require('express');
 const config = require('config');
 
 //GETTING JSON FILES
-const orders = require("../server/models/orders.json");
-const categories = require("../server/models/category.json");
 
 const PORT = config.get("PORT");
 const app = express();
