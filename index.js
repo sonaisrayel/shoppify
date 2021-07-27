@@ -13,7 +13,7 @@ app.get('./users', (req, res) => {
     res.status(200).send(users)
 })
 app.get("./orders/1", (req, res) => {
-    res.status(200).send(orders[0]);
+    res.status(200).send(orders.categories[0]);
 });
 app.get("/products", (req, res) => {
     res.status(200).send(products);
