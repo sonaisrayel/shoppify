@@ -1,24 +1,27 @@
-{
-    "categories": [
+
+[
         {
             "id": 1,
+            "name":"iphone",
             "ownerId": "1",
             "status": "paid"
         },
         {
-            "id": 1,
+            "id": 2,
+            "name":"redmi",
             "ownerId": "2",
             "status": "pending"
         },
         {
-            "id": 1,
+            "id": 3,
+            "name":"samsung",
             "ownerId": "3",
             "status": "paid"
         },
         {
-            "id": 1,
+            "id": 4,
+            "name":"huawei",
             "ownerId": "4",
             "status": "pending"
         }
     ]
-}

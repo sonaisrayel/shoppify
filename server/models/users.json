@@ -1,0 +1,37 @@
+[
+        {
+            "id": "1",
+            "name": "Tiger Nixon",
+            "salary": 320800,
+            "age": 61,
+            "profile_image": ""
+        },
+        {
+            "id": "2",
+            "name": "Garrett Winters",
+            "salary": 170750,
+            "age": 63,
+            "profile_image": ""
+        },
+        {
+            "id": "3",
+            "name": "Ashton Cox",
+            "salary": 86000,
+            "age": 66,
+            "profile_image": ""
+        },
+        {
+            "id": "4",
+            "name": "Cedric Kelly",
+            "salary": 433060,
+            "age": 22,
+            "profile_image": ""
+        },
+        {
+            "id": "5",
+            "name": "Airi Satou",
+            "salary": 162700,
+            "age": 33,
+            "profile_image": ""
+        }
+    ]

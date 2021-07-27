@@ -1,31 +1,40 @@
 {
-  "name": "shoppify",
-  "version": "1.0.0",
-  "description": "A simple shoppify project with my students",
-  "main": "index.js",
-  "scripts": {
-    "start": " node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sonaisrayel/shoppify.git"
-  },
-  "keywords": [
-    "nodejs",
-    "shoppify"
-  ],
-  "author": "WE",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sonaisrayel/shoppify/issues"
-  },
-  "homepage": "https://github.com/sonaisrayel/shoppify#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.12"
-  }
+    "name": "shoppify",
+    "version": "1.0.0",
+    "description": "A simple shoppify project with my students",
+    "main": "index.js",
+    "scripts": {
+        "start": " node index.js",
+        "dev": "nodemon index.js",
+        "start": "node server/index.js",
+        "dev": "nodemon server/index.js",
+
+
+
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sonaisrayel/shoppify.git"
+    },
+    "keywords": [
+        "nodejs",
+        "shoppify"
+    ],
+    "author": "WE",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sonaisrayel/shoppify/issues"
+    },
+    "homepage": "https://github.com/sonaisrayel/shoppify#readme",
+    "dependencies": {
+        "config": "^3.3.6",
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.12"
+    },
+    "directories": {
+        "documentation": "docs"
+    }
 }

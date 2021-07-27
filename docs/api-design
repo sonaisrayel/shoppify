@@ -4,7 +4,6 @@ POST /auth/register/admin
 GET /users - admin only
 POST /categories - admin
 
-
 User part
 Authorization controller
 
@@ -29,8 +28,6 @@ GET /products/:id
 GET /categories  (pagination)
 GET /categories/:id 
 
-
-
 Card controller
 POST /cards
 PATCH /cards/:id
@@ -46,4 +43,3 @@ POST /favorites/products
 GET /favorites/products (pagination)
 DELETE /favorites/products/:id
 	
-git add 
