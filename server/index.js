@@ -24,4 +24,40 @@ app.use('/orders', OrderRouter);
 app.use('/categories',CategoryRouter)
 
 
+//ORDERS ROUTES
+app.get('/orders', (req, res) => {
+    res.send(orders)
+});
+
+app.get("/orders/:orderId", (req, res) => {
+    const { orderId } = req.params;
+    const order = orders.find(order => order.id == orderId);
+    res.status(200).send(order);
+});
+
+//will be changed
+app.patch("/orders/:orderId", (req, res) => {
+    const { orderId } = req.params;
+    orders.find(order => JSON.stringify(order.id) === orderId).name = "new name";
+    res.status(200).send(orders);
+});
+
+//CATEGORY ROUTES
+app.get("/categories", (req, res) => {
+    res.status(200).send(categories)
+});
+
+app.get("/categories/:catId", (req, res) => {
+    const { catId } = req.params;
+    const category = categories.find(category => category.id == catId);
+    res.status(200).send(category)
+})
+
+app.patch("/categories/:catId", (req, res) => {
+    const { catId } = req.params;
+    categories.find(category => JSON.stringify(category.id) === catId).name = "new name";
+    res.status(200).send(categories);
+});
+
+
 app.listen(PORT, console.log(`Server listen to port ${PORT}`))
