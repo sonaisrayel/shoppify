@@ -1,5 +1,7 @@
 const express = require('express');
 const config = require('config');
+const bodyParser = require('body-parser')
+
 
 //GETTING JSON FILES
 const orders = require("../server/models/orders.json");
@@ -11,6 +13,10 @@ const app = express();
 // const userRoute = require('../server/routes/user-route');
 // const productROute = require('../server/routes/product-route')
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false })) 
+// parse application/json
+app.use(bodyParser.json())
 
 const { UserRouter, ProductRouter } = require('../server/routes');
 
