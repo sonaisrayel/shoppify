@@ -48,7 +48,7 @@ app.get("/categories/:catId", (req, res) => {
     res.status(200).send(category)
 })
 
-app.patch("/categories/:orderId", (req, res) => {
+app.patch("/categories/:catId", (req, res) => {
     const { catId } = req.params;
     categories.find(category => JSON.stringify(category.id) === catId).name = "new name";
     res.status(200).send(categories);
