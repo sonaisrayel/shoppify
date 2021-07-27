@@ -24,4 +24,12 @@ router.delete("/:catId", (req, res) => {
 });
 
 
+// router.patch('/:catId', (req,res)=> {
+//     const{ catId } = req.params;
+//     categories.find(category => JSON.stringify(category.id) === catId).name = "new name";
+//     res.status(200).send(categories);
+// })
+
+
+
 module.exports = router;
