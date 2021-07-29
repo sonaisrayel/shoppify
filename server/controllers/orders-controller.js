@@ -30,7 +30,13 @@ async function getOrder(req, res) {
 
 //DELETE ONE ORDER
 async function deleteOrder(req, res) {
-
+    const { orderId } = req.params;
+    if (order.orderId) {
+        const order = orders.filter(order => order.id != orderId)
+    } else {
+        res.status(404).send({ error: "Order not found" })
+    }
+    res.status(200).send(orders)
 }
 
 //UPDATE ONE ORDER
@@ -47,7 +53,7 @@ async function updateOrder(req, res) {
 }
 
 module.exports = {
-    getOrders, getOrder, updateOrder
+    getOrders, getOrder, updateOrder, deleteOrder
 }
 
 
