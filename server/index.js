@@ -2,14 +2,10 @@ const express = require('express');
 const config = require('config');
 const bodyParser = require('body-parser')
 
-
 //GETTING JSON FILES
 
 const PORT = config.get("PORT");
 const app = express();
-
-// const userRoute = require('../server/routes/user-route');
-// const productROute = require('../server/routes/product-route')
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false })) 
@@ -23,24 +19,6 @@ app.use('/products', ProductRouter);
 app.use('/orders', OrderRouter);
 app.use('/categories',CategoryRouter)
 
-
-//ORDERS ROUTES
-app.get('/orders', (req, res) => {
-    res.send(orders)
-});
-
-app.get("/orders/:orderId", (req, res) => {
-    const { orderId } = req.params;
-    const order = orders.find(order => order.id == orderId);
-    res.status(200).send(order);
-});
-
-//will be changed
-app.patch("/orders/:orderId", (req, res) => {
-    const { orderId } = req.params;
-    orders.find(order => JSON.stringify(order.id) === orderId).name = "new name";
-    res.status(200).send(orders);
-});
 
 
 

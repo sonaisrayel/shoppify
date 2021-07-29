@@ -12,6 +12,7 @@ router.get("/:productId", (req, res) => {
 
 router.delete("/:productId", (req, res) => {
     const { productId } = req.params;
+    console.log(products.splice(productId - 1, 1));
     products.splice(productId - 1, 1);
     res.status(200).send(products);
 });
