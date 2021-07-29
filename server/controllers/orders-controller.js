@@ -18,7 +18,13 @@ async function getOrders(req, res) {
 
 //GET ONE ORDER
 async function getOrder(req, res) {
-
+    const { orderId } = req.params;
+    const order = orders.find(order => order.id == orderId)
+    if (order) {
+        res.status(200).send(order)
+    } else {
+        res.status(404).send({ error: " The order not found" })
+    }
 }
 
 
@@ -33,8 +39,9 @@ async function updateOrder(req, res) {
 }
 
 module.exports = {
-    getOrders
+    getOrders, getOrder
 }
+
 
 
 
