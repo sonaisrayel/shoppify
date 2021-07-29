@@ -35,11 +35,19 @@ async function deleteOrder(req, res) {
 
 //UPDATE ONE ORDER
 async function updateOrder(req, res) {
-
+    const { orderId } = req.params;
+    const { name } = req.body
+    const order = orders.find(order => order.id == orderId)
+    if (order) {
+        order.name = name
+        res.status(201).send(order)
+    } else {
+        res.status(404).send({ error: "Order not found" })
+    }
 }
 
 module.exports = {
-    getOrders, getOrder
+    getOrders, getOrder, updateOrder
 }
 
 
