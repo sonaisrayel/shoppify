@@ -12,7 +12,6 @@ router.get("/:productId", (req, res) => {
 
 router.delete("/:productId", (req, res) => {
     const { productId } = req.params;
-    const product = products.find(product => product.id == productId);
     products.splice(productId - 1, 1);
     res.status(200).send(products);
 });
