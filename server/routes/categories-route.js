@@ -1,6 +1,7 @@
-const express = require('express');
-const router = express.Router();
 
+const express = require('express');
+const bodyParser = require('body-parser');
+const router = express.Router();
 const { getCategorys, getCategory, deleteCategory, updateCategory } = require('../controllers/category-controller')
 
 router.get('/',getCategorys);
