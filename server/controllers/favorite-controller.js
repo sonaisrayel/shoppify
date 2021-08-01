@@ -11,6 +11,22 @@ async function getFavorits(req, res) {
 
     }
 }
+//GET ONE FAVORIT
+async function getFavorit(req, res) {
+    try {
+        const { favoritId } = req.params;
+        const favorit = await FavoritModel.findOne({ _id: favoritId })
+        if (favorit) {
+            res.status(200).send(favorit)
+        } else {
+            res.status(404).send({ error: "The favorit not found" })
+        }
+
+    } catch (err) {
+        console.log({ error: err.message });
+
+    }
+}
 module.exports = {
-    getFavorits
+    getFavorits, getFavorit
 }
