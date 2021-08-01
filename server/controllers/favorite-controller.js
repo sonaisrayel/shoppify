@@ -27,6 +27,29 @@ async function getFavorit(req, res) {
 
     }
 }
+//DELETE ONE FAVORIT
+async function deleteFavorit(req, res) {
+    try {
+        const { favoritId } = req.params;
+        const favorit = await FavoritModel.findByIdAndRemove(favoritId);
+        res.status(200).send(favorit)
+    } catch (err) {
+        res.send({ error: err.message })
+    }
+}
+//UPDATE ONE FAVORIT
+async function updateFavorit(req, res) {
+    try {
+        const { favoritId } = req.params;
+        const { title } = req.body;
+        const favorit = await FavoritModel.findByIdAndUpdate(favoritId, { title }, { new: true })
+        res.status(200).send(favorit)
+    }
+    catch (err) {
+        res.send({ err: err.message })
+    }
+}
+
 module.exports = {
-    getFavorits, getFavorit
+    getFavorits, getFavorit,deleteFavorit,uptadeFavorit
 }
