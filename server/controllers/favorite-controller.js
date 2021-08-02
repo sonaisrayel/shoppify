@@ -38,6 +38,8 @@ async function deleteFavorit(req, res) {
         res.send({ error: err.message })
     }
 }
+
+
 //UPDATE ONE FAVORIT
 async function updateFavorit(req, res) {
     try {
