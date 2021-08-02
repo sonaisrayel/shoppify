@@ -2,7 +2,7 @@ const { FavoritModel } = require('../models')
 const NotFoundError = require('../errors/not-found-error')
 
 
-async function getFavorits(req, res) {
+async function getFavorites(req, res) {
     try {
         const favorits = await FavoritModel.find();
         res.send(Favorits)
@@ -11,8 +11,9 @@ async function getFavorits(req, res) {
 
     }
 }
+
 //GET ONE FAVORIT
-async function getFavorit(req, res) {
+async function getFavorite(req, res) {
     try {
         const { favoritId } = req.params;
         const favorit = await FavoritModel.findOne({ _id: favoritId })
@@ -29,7 +30,7 @@ async function getFavorit(req, res) {
 }
 
 //DELETE ONE FAVORIT
-async function deleteFavorit(req, res) {
+async function deleteFavorite(req, res) {
     try {
         const { favoritId } = req.params;
         const favorit = await FavoritModel.findByIdAndRemove(favoritId);
@@ -41,7 +42,7 @@ async function deleteFavorit(req, res) {
 
 
 //UPDATE ONE FAVORIT
-async function updateFavorit(req, res) {
+async function updateFavorite(req, res) {
     try {
         const { favoritId } = req.params;
         const { title } = req.body;
@@ -53,6 +54,10 @@ async function updateFavorit(req, res) {
     }
 }
 
+async function createFavorite(){
+    //
+}
+
 module.exports = {
-    getFavorits, getFavorit,deleteFavorit,uptadeFavorit
+    getFavorites, getFavorite, deleteFavorite,updateFavorite,createFavorite
 }
