@@ -27,6 +27,7 @@ async function getFavorit(req, res) {
 
     }
 }
+
 //DELETE ONE FAVORIT
 async function deleteFavorit(req, res) {
     try {
