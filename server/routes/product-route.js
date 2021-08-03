@@ -17,4 +17,14 @@ router.delete("/:productId", (req, res) => {
     res.status(200).send(products);
 });
 
+router.get('/', (req, res) => {
+    const { products } = req.params;
+    res.status(200).send(products);
+});
+
+router.patch('/', (req, res) => {
+    const { products } = req.params;
+    res.status(200).send(products);
+});
+
 module.exports = router;
