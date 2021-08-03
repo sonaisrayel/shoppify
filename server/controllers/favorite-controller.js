@@ -22,10 +22,18 @@ async function getFavorite(req, res) {
         } else {
             res.status(404).send({ error: "The favorit not found" })
         }
+      
+async function createFavorite(req, res) {
+    try {
+        const { title, description } = req.body;
+        const Favorite = await FavoriteModel.create({
+            title,
+            description
+        })
 
+        res.status(201).send(Favorite)
     } catch (err) {
-        console.log({ error: err.message });
-
+        res.send({ error: err.message });
     }
 }
 
@@ -54,9 +62,6 @@ async function updateFavorite(req, res) {
     }
 }
 
-async function createFavorite(){
-    //
-}
 
 module.exports = {
     getFavorites, getFavorite, deleteFavorite,updateFavorite,createFavorite
