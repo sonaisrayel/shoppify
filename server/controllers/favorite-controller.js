@@ -2,20 +2,20 @@ const { FavoritModel } = require('../models')
 const NotFoundError = require('../errors/not-found-error')
 
 
-async function createFavorit(req, res) {
+async function createFavorite(req, res) {
     try {
         const { title, description } = req.body;
-        const Favorit = await FavoritModel.create({
+        const Favorite = await FavoriteModel.create({
             title,
             description
         })
 
-        res.status(201).send(Favorit)
+        res.status(201).send(Favorite)
     } catch (err) {
         res.send({ error: err.message });
     }
 }
 
 module.exports = {
-   createFavorit
+   createFavorite
 }
