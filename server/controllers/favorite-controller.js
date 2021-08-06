@@ -1,6 +1,30 @@
 const { FavoritModel } = require('../models')
-const NotFoundError = require('../errors/not-found-error')
 
+
+async function getFavorites(req, res) {
+    try {
+        const favorits = await FavoritModel.find();
+        res.send(Favorits)
+    } catch (error) {
+        res.send({ error: error.message })
+
+    }
+}
+
+//GET ONE FAVORIT
+async function getFavorite(req, res) {
+    try {
+        const { favoritId } = req.params;
+        const favorit = await FavoritModel.findOne({ _id: favoritId })
+        if (favorit) {
+            res.status(200).send(favorit)
+        } else {
+            res.status(404).send({ error: "The favorit not found" })
+        }
+    } catch (error) {
+        res.send(error)
+    }
+}
 
 async function createFavorite(req, res) {
     try {
@@ -16,6 +40,36 @@ async function createFavorite(req, res) {
     }
 }
 
+//DELETE ONE FAVORIT
+async function deleteFavorite(req, res) {
+    try {
+        const { favoritId } = req.params;
+        const favorit = await FavoritModel.findByIdAndRemove(favoritId);
+        res.status(200).send(favorit)
+    } catch (err) {
+        res.send({ error: err.message })
+    }
+}
+
+
+//UPDATE ONE FAVORIT
+async function updateFavorite(req, res) {
+    try {
+        const { favoritId } = req.params;
+        const { title } = req.body;
+        const favorit = await FavoritModel.findByIdAndUpdate(favoritId, { title }, { new: true })
+        res.status(200).send(favorit)
+    }
+    catch (err) {
+        res.send({ err: err.message })
+    }
+}
+
+
 module.exports = {
-   createFavorite
+    getFavorites,
+    getFavorite,
+    deleteFavorite,
+    updateFavorite,
+    createFavorite
 }

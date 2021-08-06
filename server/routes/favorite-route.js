@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const { getFavorits, getFavorit, updateFavorit, deleteFavorit, createFavorit } = require('../controllers/Favorit-controller')
+const { getFavorites, getFavorite, updateFavorite, deleteFavorite, createFavorite } = require('../controllers/Favorit-controller')
 
 
-router.get('/', getFavorits );
-router.get('/:FavoritId',getFavorit)
+router.get('/', getFavorites );
+router.get('/:favoritId',getFavorite)
 
-router.patch("/:FavoritId",updateFavorit)
+router.patch("/:favoritId",updateFavorite)
 
-router.delete("/:orderId", deleteFavorit)
-router.post("/", createFavorit)
+router.delete("/:favoritId", deleteFavorite)
+router.post("/", createFavorite)
 
 
 module.exports = router;
