@@ -32,7 +32,7 @@ async function getCategory(req, res) {
 }
 
 async function updateCategory(req, res) {
-    const {catId} = req.params;
+    const { catId } = req.params;
     const { name } = req.body;
     const category = categories.find(category => category.id == catId)
     if (category) {
@@ -46,7 +46,7 @@ async function updateCategory(req, res) {
 }
 
 async function deleteCategory(req, res) {
-    const {catId} = req.params;
+    const { catId } = req.params;
 
     if (category.catId) {
         categories.splice(catId - 1, 1);
@@ -63,8 +63,8 @@ async function deleteCategory(req, res) {
 
 
 module.exports = {
-        getCategorys,
-        getCategory,
-        deleteCategory,
-        updateCategory 
-        }
+    getCategorys,
+    getCategory,
+    deleteCategory,
+    updateCategory
+}
