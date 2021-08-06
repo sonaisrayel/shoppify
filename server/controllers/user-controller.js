@@ -16,6 +16,33 @@ async function getUser(req, res) {
 
     }
 }
+
+
+async function createUser(req, res) {
+    try {
+        const { title, salary, age } = req.body;
+        const user = await UserModel.create({
+            title,
+            salary,
+            age
+        })
+
+        res.status(201).send(user)
+    } catch (err) {
+        res.send({ error: err.message });
+    }
+}
+
+async function deleteUser(req, res) {
+    try {
+        const { userId } = req.params;
+        const user = await UserModel.findByIdAndRemove(userId);
+        res.status(200).send(user)
+    } catch (err) {
+        res.send({ error: err.message })
+    }
+}
+
 module.exports = {
-    getUser
+    getUsers, getUser, updateUser, deleteUser, createUser
 }
