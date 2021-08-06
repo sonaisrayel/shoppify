@@ -1,16 +1,6 @@
 const { FavoritModel } = require('../models')
 
 
-async function getFavorites(req, res) {
-    try {
-        const favorits = await FavoritModel.find();
-        res.send(Favorits)
-    } catch (error) {
-        res.send({ error: error.message })
-
-    }
-}
-
 //GET ONE FAVORIT
 async function getFavorite(req, res) {
     try {
@@ -26,6 +16,18 @@ async function getFavorite(req, res) {
     }
 }
 
+
+async function getFavorites(req, res) {
+    try {
+        const favorits = await FavoritModel.find();
+        res.send(Favorits)
+    } catch (error) {
+        res.send({ error: error.message })
+
+    }
+}
+
+
 async function createFavorite(req, res) {
     try {
         const { title, description } = req.body;
@@ -39,6 +41,7 @@ async function createFavorite(req, res) {
         res.send({ error: err.message });
     }
 }
+
 
 //DELETE ONE FAVORIT
 async function deleteFavorite(req, res) {

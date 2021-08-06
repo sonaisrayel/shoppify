@@ -1,5 +1,21 @@
-const orders = require("../../server/models/orders.json");
-const {NotFoundError} = require('../errors/index')
+const { NotFoundError } = require('../errors/index')
+
+
+//GET ONE ORDER
+async function getOrder(req, res) {
+    const { orderId } = req.params;
+    const order = orders.find(order => order.id == orderId)
+    try {
+        if (!order) {
+            throw new NotFoundError("Orders not found")
+        }
+        res.status(200).send(order)
+    }
+    catch (error) {
+        res.status(404).send(error.message)
+    }
+
+}
 
 
 async function getOrders(req, res) {
@@ -14,37 +30,21 @@ async function getOrders(req, res) {
     }
 }
 
-//GET ONE ORDER
-async function getOrder(req, res) {
-    const { orderId } = req.params;
-    const order = orders.find(order => order.id == orderId)
-    try{
-        if(!order){
-            throw new NotFoundError("Orders not found")
-        }
-        res.status(200).send(order)
-    }
-   catch(error){
-    res.status(404).send(error.message)
-   }        
-    
-}
-
 //DELETE ONE ORDER
 async function deleteOrder(req, res) {
     const { orderId } = req.params;
     const order = orders.find(order => order.id == orderId)
-    try{
-        if(!order){
+    try {
+        if (!order) {
             throw new NotFoundError("Order not found")
         }
-        orders.splice(orderId-1,1)
+        orders.splice(orderId - 1, 1)
         res.status(200).send(orders)
     }
-    catch(error){
+    catch (error) {
         res.status(404).send(error.message)
     }
-    
+
 }
 
 
@@ -53,14 +53,14 @@ async function updateOrder(req, res) {
     const { orderId } = req.params;
     const { name } = req.body
     const order = orders.find(order => order.id == orderId)
-    try{
+    try {
         if (!order) {
-        throw new NotFoundError("Order Not Found")
-        } 
+            throw new NotFoundError("Order Not Found")
+        }
         order.name = name
         res.status(201).send(order)
     }
-    catch(error){
+    catch (error) {
         res.status(404).send(error.message)
     }
 }

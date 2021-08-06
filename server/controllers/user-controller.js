@@ -1,6 +1,21 @@
 const { UserModel } = require('../models')
 const NotFoundError = require('../errors/not-found-error')
 
+
+async function getUser(req,res){
+
+}
+
+
+async function getUsers(req, res) {
+    try {
+        const users = await UserModel.find();
+        res.send(users)
+    } catch (error) {
+        res.send({ error: error.message })
+    }
+}
+
 async function createUser(req, res) {
     try {
         const { title, salary, age } = req.body;
@@ -26,14 +41,12 @@ async function deleteUser(req, res) {
     }
 }
 
-async function getUsers(req, res) {
-    try {
-        const users = await UserModel.find();
-        res.send(users)
-    } catch (error) {
-        res.send({ error: error.message })
-    }
+async function updateUser(req,res){
+
 }
+
+
+
 
 module.exports = {
     getUsers, getUser, updateUser, deleteUser, createUser

@@ -6,9 +6,7 @@ const { getFavorites, getFavorite, updateFavorite, deleteFavorite, createFavorit
 
 router.get('/', getFavorites );
 router.get('/:favoritId',getFavorite)
-
 router.patch("/:favoritId",updateFavorite)
-
 router.delete("/:favoritId", deleteFavorite)
 router.post("/", createFavorite)
 
