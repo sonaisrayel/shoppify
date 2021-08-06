@@ -26,8 +26,7 @@ async function getOrder(req, res) {
     }
    catch(error){
     res.status(404).send(error.message)
-   }
-        
+   }        
     
 }
 
