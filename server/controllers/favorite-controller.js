@@ -1,5 +1,4 @@
 const { FavoritModel } = require('../models')
-const NotFoundError = require('../errors/not-found-error')
 
 
 async function getFavorites(req, res) {
@@ -22,7 +21,11 @@ async function getFavorite(req, res) {
         } else {
             res.status(404).send({ error: "The favorit not found" })
         }
-      
+    } catch (error) {
+        res.send(error)
+    }
+}
+
 async function createFavorite(req, res) {
     try {
         const { title, description } = req.body;
@@ -64,5 +67,9 @@ async function updateFavorite(req, res) {
 
 
 module.exports = {
-    getFavorites, getFavorite, deleteFavorite,updateFavorite,createFavorite
+    getFavorites,
+    getFavorite,
+    deleteFavorite,
+    updateFavorite,
+    createFavorite
 }
