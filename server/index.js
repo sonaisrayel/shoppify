@@ -7,6 +7,10 @@ const bodyParser = require('body-parser')
 const PORT = config.get("PORT");
 const app = express();
 
+const mongoDb =require('../db/mongo')
+mongoDb.connect();
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false })) 
 // parse application/json

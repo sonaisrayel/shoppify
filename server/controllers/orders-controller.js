@@ -4,12 +4,10 @@ const {NotFoundError} = require('../errors/index')
 
 async function getOrders(req, res) {
     try {
-
         if (!orders) {
             throw new NotFoundError('Order not found')
         }
         res.send(orders)
-
     } catch (error) {
         res.send(error.message)
 
@@ -68,10 +66,7 @@ async function updateOrder(req, res) {
     }
 }
 
+
 module.exports = {
-    getOrders, getOrder, updateOrder, deleteOrder
+    getOrders, getOrder, updateOrder, deleteOrder, createOrder
 }
-
-
-
-

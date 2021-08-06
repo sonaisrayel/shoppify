@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-const users = require("../../server/models/users.json");
 
-//USERS ROUTES
-//GET USERS
-router.get('/', (req, res) => {
-    res.status(200).send(users)
-});
+const { getUsers, getUser, updateUser, deleteuser, createUser } = require('../controllers/user-controller')
 
-//get one user localhost:3000/users/1
-router.get("/:userId", (req, res) => {
-    const { userId } = req.params;
-    const user = users.find(user => user.id === userId);
-    res.send(user)
-});
+
+
+const { getUsers, getUser, updateUser, deleteUser, createUser} = require('../controllers/user-controller')
+
+router.get('/', getUsers)
+router.get('/:userId', getUser)
+router.get('/:userId', updateUser)
+router.patch('/:userId', updateUser)
+router.delete('/:userId', deleteUser)
+router.post('/', createUser)
+
 
 module.exports = router;
