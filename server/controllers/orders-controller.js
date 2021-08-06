@@ -1,83 +1,72 @@
-const { OrderModel } = require('../models')
-const NotFoundError = require('../errors/not-found-error')
+const orders = require("../../server/models/orders.json");
+const {NotFoundError} = require('../errors/index')
 
 
 async function getOrders(req, res) {
     try {
-        const orders = await OrderModel.find();
+        if (!orders) {
+            throw new NotFoundError('Order not found')
+        }
         res.send(orders)
     } catch (error) {
-        res.send({ error: error.message })
+        res.send(error.message)
 
     }
 }
 
 //GET ONE ORDER
 async function getOrder(req, res) {
-    try {
-        const { orderId } = req.params;
-        const order = await OrderModel.findOne({ _id: orderId })
-        if (order) {
-            res.status(200).send(order)
-        } else {
-            res.status(404).send({ error: "The order not found" })
+    const { orderId } = req.params;
+    const order = orders.find(order => order.id == orderId)
+    try{
+        if(!order){
+            throw new NotFoundError("Orders not found")
         }
-
-    } catch (err) {
-        console.log({ error: err.message });
-
+        res.status(200).send(order)
     }
+   catch(error){
+    res.status(404).send(error.message)
+   }
+        
+    
 }
 
 //DELETE ONE ORDER
 async function deleteOrder(req, res) {
-    try {
-        const { orderId } = req.params;
-        const order = await OrderModel.findByIdAndRemove(orderId);
-        res.status(200).send(order)
-    } catch (err) {
-        res.send({ error: err.message })
+    const { orderId } = req.params;
+    const order = orders.find(order => order.id == orderId)
+    try{
+        if(!order){
+            throw new NotFoundError("Order not found")
+        }
+        orders.splice(orderId-1,1)
+        res.status(200).send(orders)
     }
+    catch(error){
+        res.status(404).send(error.message)
+    }
+    
 }
 
 
 //UPDATE ONE ORDER
 async function updateOrder(req, res) {
-    try {
-        const { orderId } = req.params;
-        const { title } = req.body;
-        const order = await OrderModel.findByIdAndUpdate(orderId, { title }, { new: true })
-        res.status(200).send(order)
-    }
-    catch (err) {
-        res.send({ err: err.message })
-    }
-}
-
-
-async function createOrder(req, res) {
-    try {
-        const { title, description } = req.body;
-        const order = await OrderModel.create({
-            title,
-            description
-        })
-
+    const { orderId } = req.params;
+    const { name } = req.body
+    const order = orders.find(order => order.id == orderId)
+    try{
+        if (!order) {
+        throw new NotFoundError("Order Not Found")
+        } 
+        order.name = name
         res.status(201).send(order)
-    } catch (err) {
-        res.send({ error: err.message });
+    }
+    catch(error){
+        res.status(404).send(error.message)
     }
 }
 
-
-// async function createOrders(){
-
-// }
 
 module.exports = {
     getOrders, getOrder, updateOrder, deleteOrder, createOrder
 }
-
-
-
-
