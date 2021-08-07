@@ -1,5 +1,6 @@
 const categories = require("../../server/models/category.json");
-const { NotFoundError } = require('../errors/index')
+const { NotFoundError,NotModifiedError } = require('../errors/index');
+const { CategoryModel } = require("../models");
 
 
 async function getCategory(req, res) {
@@ -33,35 +34,31 @@ async function getCategories(req, res) {
 
 
 async function updateCategory(req, res) {
-    const { catId } = req.params;
-    const { name } = req.body;
-    const category = categories.find(category => category.id == catId)
     try {
-        if (!category) {
-            throw new NotFoundError("Can not update Category")
+        const { catid } = req.params;
+        const { title } = req.body;
+        const category = await CategoryModel.findByIdAndUpdate(catid, { title }, { new: true })
+        if(!category){
+            throw new NotModifiedError("Category data not updated")
         }
-        category.name = name
         res.status(200).send(category)
     }
-    catch (error) {
-        res.status(404).send(error.message)
+    catch (err) {
+        res.send({ err: err.message })
     }
 }
 
 async function deleteCategory(req, res) {
-    const { catId } = req.params;
-    const category = categories.find(category => category.id == catId)
     try {
-        if (!category.catId) {
-            throw new NotFoundError("Can not delete Category")
+        const { catid } = req.params;
+        const category = await CategoryModel.findByIdAndRemove(catid);
+        if(!category){
+            throw new NotModifiedError("Can not Delete Category");
         }
-        categories.splice(catId - 1, 1);
+        res.status(200).send(category);
+    } catch (err) {
+        res.send({ error: err.message })
     }
-    catch (error) {
-        res.status(404).send(error.message)
-    }
-
-    res.status(200).send(categories)
 }
 
 
@@ -72,7 +69,7 @@ async function createCategory(req, res) {
 
         const category = await CategoryModel.create({ name });
         if (!category) {
-            throw new Error("Resource not created")
+            throw new NotModifiedError("Category not created")
         }
         res.status(201).send(category)
     }
