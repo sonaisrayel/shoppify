@@ -26,6 +26,8 @@ app.use('/orders', OrderRouter);
 app.use('/categories', CategoryRouter)
 
 
-
+app.get("*",(req,res)=>{
+    res.status(404).send("404 error not found");
+    });
 
 app.listen(PORT, console.log(`Server listen to port ${PORT}`))
