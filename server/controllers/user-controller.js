@@ -3,6 +3,17 @@ const NotFoundError = require('../errors/not-found-error')
 
 
 async function getUser(req,res){
+    try {
+        const { userId } = req.params;
+        const user = await UserModel.findOne({ _id: userId })
+        if (user) {
+            res.status(200).send(user)
+        } else {
+            res.status(404).send({ error: "The user not found" })
+        }
+    } catch (error) {
+        res.send(error)
+    }
 
 }
 
@@ -42,7 +53,15 @@ async function deleteUser(req, res) {
 }
 
 async function updateUser(req,res){
-
+    try {
+        const { userId } = req.params;
+        const { title } = req.body;
+        const user = await UserModel.findByIdAndUpdate(userId, { title }, { new: true })
+        res.status(200).send(user)
+    }
+    catch (err) {
+        res.send({ err: err.message })
+    }
 }
 
 
