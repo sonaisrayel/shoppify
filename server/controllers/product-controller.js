@@ -25,3 +25,15 @@ async function getproduct(req, res) {
         res.send(error.message)
     }
 }
+//DELETE ONE PRODUCT
+async function deleteproduct(req, res) {
+    try {
+        const { productId } = req.params;
+        const product = await productModel.findOneAndDelete({ productId })
+        res.status(200).send(product)
+    }
+    catch (error) {
+        res.status(404).send(error.message)
+    }
+
+}
