@@ -52,3 +52,14 @@ async function updateproduct(req, res) {
     }
 }
 
+async function createproduct(req, res) {
+    try {
+        const { title, description } = req.body;
+        const product = await productModel.create({ title, description });
+        if (product) {
+            res.status(201).send(product)
+        }
+    } catch (error) {
+        res.send(error);
+    }
+}
