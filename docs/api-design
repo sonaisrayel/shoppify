@@ -42,4 +42,12 @@ Favorites controller
 POST /favorites/products
 GET /favorites/products (pagination)
 DELETE /favorites/products/:id
+
+
+//Authorization -JWT TOCKEN
+//Middlewares
+//Error handling - With class
+
+//Validation - joi
+
 	

@@ -1,15 +1,17 @@
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const router = express.Router();
-const { getCategorys, getCategory, deleteCategory, updateCategory } = require('../controllers/category-controller')
 
-router.get('/',getCategorys);
+const { getCategories, getCategory, deleteCategory, updateCategory,createCategory } = require('../controllers/category-controller')
 
-router.get('/:catId', getCategory) 
+router.get('/categories',getCategories);
 
-router.delete("/:catId", deleteCategory);
+router.get("/category/:catId", getCategory); 
 
-router.patch('/:catId', updateCategory )
+router.delete("/category/:catId", deleteCategory);
+
+router.patch('category/:catId', updateCategory );
+
+router.post('/category', createCategory)
 
 module.exports = router;

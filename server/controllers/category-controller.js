@@ -1,72 +1,87 @@
-const categories = require("../../server/models/category.json");
-const {NotFoundError} = require('../errors/index')
+const { NotFoundError,NotModifiedError } = require('../errors/index');
+const { CategoryModel } = require("../models");
 
-async function getCategorys(req, res) {
+
+async function getCategory(req, res) {
+    const { catid } = req.params;
+        const category = await CategoryModel.findById(catid);
     try {
+        
+        if (!category) {
+          throw new NotFoundError("category not found");
+        }
+        res.status(200).send(category)
+    } catch (error) {
+        res.send(error.message)
+    }
+}
+async function getCategories(req, res) {
+    try {
+        const categories = await CategoryModel.find();
         if (!categories) {
             throw new NotFoundError('Categories are not found')
         }
-        res.send(categories)
+        res.status(200).send(categories)
 
     } catch (error) {
         res.send(error.message)
 
     }
 }
-async function getCategory(req, res) {
-    const catId = req.params;
-    const category = categories.find(category => category.id == catId);
 
-    try {
-        if (!category) {
-            throw new NotFoundError('Category not found')
-        }
-        res.status(200).send(category)
-
-    } catch (error) {
-        res.send(error.message)
-    }
-}
 
 async function updateCategory(req, res) {
-    const {catId} = req.params;
-   
-    const {name} = req.body;
-    const category = categories.find(category => category.id == catId)
-    try{
+    try {
+        const { catid } = req.params;
+        const { title } = req.body;
+        const category = await CategoryModel.findByIdAndUpdate(catid, { title }, { new: true })
         if(!category){
-            throw new NotFoundError("Can not update Category")
+            throw new NotModifiedError("Category data not updated")
         }
-        category.name = name
         res.status(200).send(category)
     }
-   catch(error) {
-        res.status(404).send(error.message)
+    catch (err) {
+        res.send({ err: err.message })
     }
 }
 
 async function deleteCategory(req, res) {
-    const {catId} = req.params;
-    const category = categories.find(category => category.id == catId)
-    try{
-        if (!category.catId) {
-            throw new NotFoundError("Can not delete Category")
+    try {
+        const { catid } = req.params;
+        const category = await CategoryModel.findByIdAndRemove(catid);
+        if(!category){
+            throw new NotModifiedError("Can not Delete Category");
         }
-        categories.splice(catId - 1, 1);
+        res.status(200).send(category);
+    } catch (err) {
+        res.send({ error: err.message })
     }
-    catch(error){
-            res.status(404).send(error.message)
+}
+
+
+async function createCategory(req, res) {
+
+    try {
+        const { name } = req.body;
+
+        const category = await CategoryModel.create({ name });
+        if (!category) {
+            throw new NotModifiedError("Category not created")
+        }
+        res.status(201).send(category)
+    }
+    catch (error) {
+        res.send({ error: error.message })
     }
 
-    res.status(200).send(categories)
 }
 
 
 
-
 module.exports = {
-        getCategorys,
-        getCategory,
-        deleteCategory,
-        updateCategory 
-        }
+    getCategories,
+    getCategory,
+    deleteCategory,
+    updateCategory,
+    createCategory
+}
