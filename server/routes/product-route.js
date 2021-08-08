@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 
 const products = require("../../server/models/product.json");
@@ -19,4 +19,14 @@ router.delete("/:productId", (req, res) => {
     res.status(200).send(products);
 });
 
+module.exports = router;*/
+
+const express = require('express');
+const router = express.Router();
+const { getproduct, getgetproduct, updategetproduct, deletegetproduct, creategetproduct } = require('../controllers/getproduct-controller')
+router.get('/', getproduct );
+router.get('/:Idproduct',getproduct)
+router.patch("/:productId",updateproduct)
+router.delete("/:productId", deleteproduct)
+router.post("/", createproduct)
 module.exports = router;
