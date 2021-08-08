@@ -37,3 +37,18 @@ async function deleteproduct(req, res) {
     }
 
 }
+
+//UPDATE ONE PRODUCT
+async function updateproduct(req, res) {
+    try {
+        const { productId } = req.params;
+        const { name } = req.body
+        const product = await productModel.findByIdAndUpdate(productId, { title }, { new: true })
+
+        res.status(201).send(product)
+    }
+    catch (error) {
+        res.status(404).send(error.message)
+    }
+}
+
