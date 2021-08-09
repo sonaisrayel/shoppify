@@ -1,7 +1,7 @@
 const { NotFoundError } = require('../errors/index');
 const { productModel } = require("../models");
 //GET ONE PRODUCT
-async function getproduct(req, res) {
+async function getProduct(req, res) {
     const { productId } = req.params;
     const product = await productModel.find({ _id: productId })
     try {
@@ -14,7 +14,7 @@ async function getproduct(req, res) {
         res.status(404).send(error.message)
     }
 }
-async function getproducts(req, res) {
+async function getProducts(req, res) {
     try {
         const products = await productModel.find()
         if (!products) {
@@ -26,7 +26,7 @@ async function getproducts(req, res) {
     }
 }
 //DELETE ONE PRODUCT
-async function deleteproduct(req, res) {
+async function deleteProduct(req, res) {
     try {
         const { productId } = req.params;
         const product = await productModel.findOneAndDelete({ productId })
@@ -39,7 +39,7 @@ async function deleteproduct(req, res) {
 }
 
 //UPDATE ONE PRODUCT
-async function updateproduct(req, res) {
+async function updateProduct(req, res) {
     try {
         const { productId } = req.params;
         const { name } = req.body
@@ -52,7 +52,7 @@ async function updateproduct(req, res) {
     }
 }
 
-async function createproduct(req, res) {
+async function createProduct(req, res) {
     try {
         const { title, description } = req.body;
         const product = await productModel.create({ title, description });
@@ -64,9 +64,9 @@ async function createproduct(req, res) {
     }
 }
 module.exports = {
-    getproduct,
-    getproducts,
-    deleteproduct,
-    updateproduct,
-    createproduct
+    getProduct,
+    getProducts,
+    deleteProduct,
+    updateProduct,
+    createProduct
 }
