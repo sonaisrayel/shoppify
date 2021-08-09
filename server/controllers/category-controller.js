@@ -1,14 +1,14 @@
-const { NotFoundError,NotModifiedError } = require('../errors/index');
+const { NotFoundError, NotModifiedError } = require('../errors/index');
 const { CategoryModel } = require("../models");
 
 
 async function getCategory(req, res) {
-    const { catid } = req.params;
-        const category = await CategoryModel.findById(catid);
     try {
-        
+        const { catid } = req.params;
+        const category = await CategoryModel.findById(catid);
+
         if (!category) {
-          throw new NotFoundError("category not found");
+            throw new NotFoundError("category not found");
         }
         res.status(200).send(category)
     } catch (error) {
@@ -35,7 +35,7 @@ async function updateCategory(req, res) {
         const { catid } = req.params;
         const { title } = req.body;
         const category = await CategoryModel.findByIdAndUpdate(catid, { title }, { new: true })
-        if(!category){
+        if (!category) {
             throw new NotModifiedError("Category data not updated")
         }
         res.status(200).send(category)
@@ -49,7 +49,7 @@ async function deleteCategory(req, res) {
     try {
         const { catid } = req.params;
         const category = await CategoryModel.findByIdAndRemove(catid);
-        if(!category){
+        if (!category) {
             throw new NotModifiedError("Can not Delete Category");
         }
         res.status(200).send(category);
