@@ -14,13 +14,13 @@ async function getproduct(req, res) {
         res.status(404).send(error.message)
     }
 }
-async function getproduct(req, res) {
+async function getproducts(req, res) {
     try {
-        const product = await productModel.find()
-        if (!orders) {
-            throw new NotFoundError('product not found')
+        const products = await productModel.find()
+        if (!products) {
+            throw new NotFoundError('products not found')
         }
-        res.send(product)
+        res.send(products)
     } catch (error) {
         res.send(error.message)
     }
@@ -62,4 +62,11 @@ async function createproduct(req, res) {
     } catch (error) {
         res.send(error);
     }
+}
+module.exports = {
+    getproduct,
+    getproducts,
+    deleteproduct,
+    updateproduct,
+    createproduct
 }
