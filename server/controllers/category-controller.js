@@ -10,11 +10,14 @@ async function getCategory(req, res) {
         if (!category) {
             throw new NotFoundError("category not found");
         }
+        
         res.status(200).send(category)
     } catch (error) {
         res.send(error.message)
     }
 }
+
+
 async function getCategories(req, res) {
     try {
         const categories = await CategoryModel.find();

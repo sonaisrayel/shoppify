@@ -1,16 +1,18 @@
 const { NotFoundError } = require('../errors/index');
 const { OrderModel } = require("../models");
+const ResponceHandler = require('../handlers/ResponceHandler')
 
 
 //GET ONE ORDER
 async function getOrder(req, res) {
     const { orderId } = req.params;
-    const order = await OrderModel.find({ _id: orderId })
+
+    const order = await OrderModel.findOne({ _id: orderId })
     try {
-        if (!orde) {
-            throw new NotFoundError("Orders not found")
+        if (!order) {
+            throw new NotFoundError("Order is not found")
         }
-        res.status(200).send(order)
+        ResponceHandler.handleGet(res, order);
     }
     catch (error) {
         res.status(404).send(error.message)
@@ -21,11 +23,11 @@ async function getOrder(req, res) {
 
 async function getOrders(req, res) {
     try {
-        const Orders = await OrderModel.find()
+        const orders = await OrderModel.find()
         if (!orders) {
             throw new NotFoundError('Orders not found')
         }
-        res.send(orders)
+        ResponceHandler.handleList(res, orders)
     } catch (error) {
         res.send(error.message)
 

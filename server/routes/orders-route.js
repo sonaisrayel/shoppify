@@ -5,7 +5,7 @@ const { getOrders, getOrder, updateOrder, deleteOrder, createOrder } = require('
 
 
 router.get('/', getOrders );
-router.get('/:Idorder',getOrder)
+router.get('/:orderId',getOrder)
 router.patch("/:orderId",updateOrder)
 router.delete("/:orderId", deleteOrder)
 router.post("/", createOrder)
