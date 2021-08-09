@@ -23,11 +23,11 @@ const { UserRouter, ProductRouter, OrderRouter, CategoryRouter } = require('../s
 app.use('/users', UserRouter);
 app.use('/products', ProductRouter);
 app.use('/orders', OrderRouter);
-app.use('/', CategoryRouter)
+app.use('/', CategoryRouter);
 
 
-app.get("*",(req,res)=>{
-    res.status(404).send("404 error not found");
-    });
+app.get("*", (req, res) => {
+    res.status(404).send("Route not found");
+});
 
 app.listen(PORT, console.log(`Server listen to port ${PORT}`))
