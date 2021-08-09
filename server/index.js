@@ -23,7 +23,7 @@ const { UserRouter, ProductRouter, OrderRouter, CategoryRouter } = require('../s
 app.use('/users', UserRouter);
 app.use('/products', ProductRouter);
 app.use('/orders', OrderRouter);
-app.use('/', CategoryRouter);
+app.use('/category', CategoryRouter);
 
 
 app.get("*", (req, res) => {
