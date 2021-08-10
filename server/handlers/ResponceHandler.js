@@ -15,15 +15,15 @@ class ResponceHandler {
   
 
     static handleDelete() {
-
+        return res.status(HTTP.OK).json(data)
     }
 
     static handleUpdate() {
-
+        return res.status(HTTP.OK).json(data)
     }
 
     static handleCreate() {
-
+        return res.status(201).json(data)
     }
 
     static handleGet(res, data) {
