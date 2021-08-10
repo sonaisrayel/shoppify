@@ -1,18 +1,19 @@
 const { UserModel } = require('../models')
 const NotFoundError = require('../errors/not-found-error')
+const ResponceHandler = require('../handlers/ResponceHandler')
 
+async function getUser(req, res) {
+ const { userId } = req.params;
 
-async function getUser(req,res){
+    const user = await UserModel.findOne({ _id: userId })
     try {
-        const { userId } = req.params;
-        const user = await UserModel.findOne({ _id: userId })
-        if (user) {
-            res.status(200).send(user)
-        } else {
-            res.status(404).send({ error: "The user not found" })
+        if (!user) {
+            throw new NotFoundError("User is not found")
         }
+        ResponceHandler.handleGet(res, user);
+
     } catch (error) {
-        res.send(error)
+        res.status(404).send(error.message)
     }
 
 }
@@ -21,7 +22,10 @@ async function getUser(req,res){
 async function getUsers(req, res) {
     try {
         const users = await UserModel.find();
-        res.send(users)
+        if(!users){
+            throw new NotFoundError('Users not found')
+        }
+        ResponceHandler.handleList(res, users)
     } catch (error) {
         res.send({ error: error.message })
     }
@@ -36,7 +40,7 @@ async function createUser(req, res) {
             age
         })
 
-        res.status(201).send(user)
+        ResponceHandler.handleCreate(res, user)
     } catch (err) {
         res.send({ error: err.message });
     }
@@ -46,18 +50,18 @@ async function deleteUser(req, res) {
     try {
         const { userId } = req.params;
         const user = await UserModel.findByIdAndRemove(userId);
-        res.status(200).send(user)
+        ResponceHandler.handleDelete(res, user)
     } catch (err) {
         res.send({ error: err.message })
     }
 }
 
-async function updateUser(req,res){
+async function updateUser(req, res) {
     try {
         const { userId } = req.params;
         const { title } = req.body;
         const user = await UserModel.findByIdAndUpdate(userId, { title }, { new: true })
-        res.status(200).send(user)
+        ResponceHandler.handleUpdate(res, user)
     }
     catch (err) {
         res.send({ err: err.message })
