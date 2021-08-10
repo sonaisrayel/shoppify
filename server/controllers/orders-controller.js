@@ -37,38 +37,41 @@ async function getOrders(req, res) {
 //DELETE ONE ORDER
 async function deleteOrder(req, res) {
     try {
-        const { orderId } = req.params;
-        const order = await OrderModel.findOneAndDelete({ orderId })
-        res.status(200).send(order)
+        const { catid } = req.params;
+        const order = await OrderyModel.findByIdAndRemove(catid);
+        if (!order) {
+            throw new NotModifiedError("Can not Delete Order");
+        }
+        ResponceHandler.handleGet(res, order);
+    } catch (err) {
+        res.send({ error: err.message })
     }
-    catch (error) {
-        res.status(404).send(error.message)
-    }
-
 }
 
 
 //UPDATE ONE ORDER
 async function updateOrder(req, res) {
     try {
-        const { orderId } = req.params;
-        const { name } = req.body
-        const order = await OrderModel.findByIdAndUpdate(orderId, { title }, { new: true })
-
-        res.status(201).send(order)
+        const { catid } = req.params;
+        const { title } = req.body;
+        const order = await OrderModel.findByIdAndUpdate(catid, { title }, { new: true })
+        if (!order) {
+            throw new NotModifiedError("Order data not updated")
+        }
+        ResponceHandler.handleGet(res, order);
     }
-    catch (error) {
-        res.status(404).send(error.message)
+    catch (err) {
+        res.send({ err: err.message })
     }
 }
 
-
+// CREATE ONE ORDER
 async function createOrder(req, res) {
     try {
         const { title, description } = req.body;
         const order = await OrderModel.create({ title, description });
         if (order) {
-            res.status(201).send(order)
+            ResponceHandler.handleList(res, order)
         }
     } catch (error) {
         res.send(error);
