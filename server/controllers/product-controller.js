@@ -1,18 +1,19 @@
 const { NotFoundError } = require('../errors');
 const { ProductModel } = require("../models");
-
+const ResponceHandler = require('../handlers/ResponceHandler')
 
 //GET ONE PRODUCT
 async function getProduct(req, res) {
-    try {
-        const { productId } = req.params;
-        const product = await ProductModel.find({ _id: productId })
 
+    const { productId } = req.params;
+
+    const product = await ProductModel.find({ _id: productId })
+    try {
+       
         if (!product) {
             throw new NotFoundError("Product not found")
         }
-
-        res.status(200).send(product)
+        ResponceHandler.handleGet(res, product);
     }
     catch (error) {
         res.status(404).send(error.message)
@@ -27,7 +28,7 @@ async function getProducts(req, res) {
         if (!products) {
             throw new NotFoundError('Products not found')
         }
-        res.send(products)
+        ResponceHandler.handleList(res, products)
     } catch (error) {
         res.send(error.message)
     }
@@ -39,7 +40,7 @@ async function deleteProduct(req, res) {
     try {
         const { productId } = req.params;
         const product = await ProductModel.findOneAndDelete({ _id: productId })
-        res.status(200).send(product)
+        ResponceHandler.handleDelete(res, product)
     }
     catch (error) {
         res.status(404).send(error.message)
@@ -55,7 +56,7 @@ async function updateProduct(req, res) {
 
         const product = await ProductModel.findByIdAndUpdate(productId, { name }, { new: true })
 
-        res.status(201).send(product)
+        ResponceHandler.handleUpdate(res, product)
     }
     catch (error) {
         res.status(404).send(error.message)
@@ -67,7 +68,7 @@ async function createProduct(req, res) {
         const { name, description, owner, category } = req.body;
         const product = await ProductModel.create({ name, description, owner, category });
         if (product) {
-            res.status(201).send(product)
+            ResponceHandler.handleCreate(res, product)
         }
     } catch (error) {
         res.status(404).send(error.message);

@@ -25,7 +25,10 @@ class ResponceHandler {
     static handleCreate() {
         return res.status(201).json(data)
     }
-
+    /**     
+     * @param {Object} res 
+     * @param {Object} data 
+     */
     static handleGet(res, data) {
         console.log(data);
         return res.status(HTTP.OK).json(data)
