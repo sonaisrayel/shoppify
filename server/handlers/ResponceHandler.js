@@ -12,26 +12,18 @@ class ResponceHandler {
     static handleList(res, data) {
         return res.status(HTTP.OK).json(data)
     }
-    /**     
-     * @param {Object} res 
-     * @param {Object} data 
-     */
-    static handleDelete(res, data) {
+  
+
+    static handleDelete() {
         return res.status(HTTP.OK).json(data)
     }
-     /**     
-     * @param {Object} res 
-     * @param {Object} data 
-     */
-    static handleUpdate(res, data) {
+
+    static handleUpdate() {
         return res.status(HTTP.OK).json(data)
     }
-     /**     
-     * @param {Object} res 
-     * @param {Object} data 
-     */
-    static handleCreate(res, data) {
-        return res.status(HTTP.CREATED).json(data)
+
+    static handleCreate() {
+        return res.status(201).json(data)
     }
     /**     
      * @param {Object} res 

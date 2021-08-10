@@ -10,8 +10,7 @@ async function getCategory(req, res) {
         if (!category) {
             throw new NotFoundError("category not found");
         }
-        
-        res.status(200).send(category)
+        ResponceHandler.handleGet(res, category);
     } catch (error) {
         res.send(error.message)
     }
@@ -24,7 +23,7 @@ async function getCategories(req, res) {
         if (!categories) {
             throw new NotFoundError('Categories are not found')
         }
-        res.status(200).send(categories)
+        ResponceHandler.handleGet(res, categories);
 
     } catch (error) {
         res.send(error.message)
@@ -41,7 +40,7 @@ async function updateCategory(req, res) {
         if (!category) {
             throw new NotModifiedError("Category data not updated")
         }
-        res.status(200).send(category)
+        ResponceHandler.handleGet(res, category);
     }
     catch (err) {
         res.send({ err: err.message })
@@ -55,7 +54,7 @@ async function deleteCategory(req, res) {
         if (!category) {
             throw new NotModifiedError("Can not Delete Category");
         }
-        res.status(200).send(category);
+        ResponceHandler.handleGet(res, category);
     } catch (err) {
         res.send({ error: err.message })
     }
@@ -71,7 +70,7 @@ async function createCategory(req, res) {
         if (!category) {
             throw new NotModifiedError("Category not created")
         }
-        res.status(201).send(category)
+        ResponceHandler.handleGet(res, category);
     }
     catch (error) {
         res.send({ error: error.message })
