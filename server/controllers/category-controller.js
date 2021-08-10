@@ -1,15 +1,18 @@
 const { NotFoundError, NotModifiedError } = require('../errors/index');
 const { CategoryModel } = require("../models");
+const ResponceHandler = require('../handlers/ResponceHandler')
+
 
 
 async function getCategory(req, res) {
     try {
-        const { catid } = req.params;
-        const category = await CategoryModel.findById(catid);
+        const { catId } = req.params;
+        const category = await CategoryModel.findById(catId);
 
         if (!category) {
-            throw new NotFoundError("category not found");
+            throw new NotFoundError("Category not found");
         }
+
         ResponceHandler.handleGet(res, category);
     } catch (error) {
         res.send(error.message)
@@ -34,9 +37,9 @@ async function getCategories(req, res) {
 
 async function updateCategory(req, res) {
     try {
-        const { catid } = req.params;
+        const { catId } = req.params;
         const { title } = req.body;
-        const category = await CategoryModel.findByIdAndUpdate(catid, { title }, { new: true })
+        const category = await CategoryModel.findByIdAndUpdate(catId, { title }, { new: true })
         if (!category) {
             throw new NotModifiedError("Category data not updated")
         }
@@ -49,8 +52,8 @@ async function updateCategory(req, res) {
 
 async function deleteCategory(req, res) {
     try {
-        const { catid } = req.params;
-        const category = await CategoryModel.findByIdAndRemove(catid);
+        const { catId } = req.params;
+        const category = await CategoryModel.findByIdAndRemove(catId);
         if (!category) {
             throw new NotModifiedError("Can not Delete Category");
         }

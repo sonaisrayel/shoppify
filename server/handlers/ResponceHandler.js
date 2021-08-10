@@ -12,7 +12,7 @@ class ResponceHandler {
     static handleList(res, data) {
         return res.status(HTTP.OK).json(data)
     }
-  
+
 
     static handleDelete() {
         return res.status(HTTP.OK).json(data)
@@ -22,9 +22,15 @@ class ResponceHandler {
         return res.status(HTTP.OK).json(data)
     }
 
-    static handleCreate() {
+
+    /**     
+  * @param {Object} res 
+  * @param {Object} data 
+  */
+    static handleCreate(res, data) {
         return res.status(201).json(data)
     }
+
     /**     
      * @param {Object} res 
      * @param {Object} data 

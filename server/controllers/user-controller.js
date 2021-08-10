@@ -3,7 +3,7 @@ const NotFoundError = require('../errors/not-found-error')
 const ResponceHandler = require('../handlers/ResponceHandler')
 
 async function getUser(req, res) {
- const { userId } = req.params;
+    const { userId } = req.params;
 
     const user = await UserModel.findOne({ _id: userId })
     try {
@@ -22,7 +22,7 @@ async function getUser(req, res) {
 async function getUsers(req, res) {
     try {
         const users = await UserModel.find();
-        if(!users){
+        if (!users) {
             throw new NotFoundError('Users not found')
         }
         ResponceHandler.handleList(res, users)

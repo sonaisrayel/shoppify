@@ -17,13 +17,14 @@ app.use(bodyParser.json())
 
 
 //routers
-const { UserRouter, ProductRouter, OrderRouter, CategoryRouter } = require('../server/routes');
+const { UserRouter, ProductRouter, OrderRouter, CategoryRouter, AuthRouter} = require('../server/routes');
 
 
 app.use('/users', UserRouter);
 app.use('/products', ProductRouter);
 app.use('/orders', OrderRouter);
 app.use('/category', CategoryRouter);
+app.use('/auth', AuthRouter)
 
 
 app.get("*", (req, res) => {

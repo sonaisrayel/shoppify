@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getFavorites, getFavorite, updateFavorite, deleteFavorite, createFavorite } = require('../controllers/Favorit-controller')
+const { getFavorites, getFavorite, updateFavorite, deleteFavorite, createFavorite } = require('../controllers/favorit-controller')
 
 
 router.get('/', getFavorites );
