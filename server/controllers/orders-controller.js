@@ -38,7 +38,7 @@ async function getOrders(req, res) {
 async function deleteOrder(req, res) {
     try {
         const { catid } = req.params;
-        const order = await OrderyModel.findByIdAndRemove(catid);
+        const order = await OrderModel.findByIdAndRemove(catid);
         if (!order) {
             throw new NotModifiedError("Can not Delete Order");
         }
