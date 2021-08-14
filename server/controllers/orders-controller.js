@@ -1,13 +1,18 @@
 const { NotFoundError } = require('../errors/index');
 const { OrderModel } = require("../models");
 const ResponceHandler = require('../handlers/ResponceHandler')
+const JWT = require('jsonwebtoken');
+
 
 
 //GET ONE ORDER
 async function getOrder(req, res) {
-    const { orderId } = req.params;
+    const { orderId, userID } = req.params;
+    const { authorization } = req.headers
 
-    const order = await OrderModel.findOne({ _id: orderId })
+    const tockenUserID = await JWT.verify(authorization, 'shop');
+
+    const order = await OrderModel.findOne({ _id: orderId, userID: tockenUserID._id })
     try {
         if (!order) {
             throw new NotFoundError("Order is not found")
@@ -17,7 +22,6 @@ async function getOrder(req, res) {
     catch (error) {
         res.status(404).send(error.message)
     }
-
 }
 
 
@@ -68,8 +72,12 @@ async function updateOrder(req, res) {
 // CREATE ONE ORDER
 async function createOrder(req, res) {
     try {
+        const { autorization } = req.headers
+
+        const { _id } = await JWT.verify(autorization, process.env.SECRET);
+
         const { title, description } = req.body;
-        const order = await OrderModel.create({ title, description });
+        const order = await OrderModel.create({ title, description, userID: _id });
         if (order) {
             ResponceHandler.handleList(res, order)
         }

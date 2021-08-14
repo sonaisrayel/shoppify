@@ -1,6 +1,8 @@
 const express = require('express');
 const config = require('config');
 const bodyParser = require('body-parser')
+require('dotenv').config()
+
 
 
 const PORT = config.get("PORT");

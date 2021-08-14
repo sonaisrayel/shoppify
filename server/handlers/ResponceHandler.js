@@ -13,7 +13,6 @@ class ResponceHandler {
         return res.status(HTTP.OK).json(data)
     }
 
-
     static handleDelete() {
         return res.status(HTTP.OK).json(data)
     }
@@ -21,7 +20,6 @@ class ResponceHandler {
     static handleUpdate() {
         return res.status(HTTP.OK).json(data)
     }
-
 
     /**     
   * @param {Object} res 
@@ -36,7 +34,6 @@ class ResponceHandler {
      * @param {Object} data 
      */
     static handleGet(res, data) {
-        console.log(data);
         return res.status(HTTP.OK).json(data)
     }
 }
