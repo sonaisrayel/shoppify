@@ -1,4 +1,4 @@
-const { NotFoundError } = require('../errors/index');
+const { NotFoundError,NotModifiedError } = require('../errors/index');
 const { OrderModel } = require("../models");
 const ResponceHandler = require('../handlers/ResponceHandler')
 const JWT = require('jsonwebtoken');
@@ -26,8 +26,11 @@ async function getOrder(req, res) {
 
 
 async function getOrders(req, res) {
-    try {
-        const orders = await OrderModel.find()
+    const { authorization } = req.headers
+    const tockenUserID = await JWT.verify(authorization, 'shop');
+    let orders = await  OrderModel.find({userID: tockenUserID._id});
+ try {
+        
         if (!orders) {
             throw new NotFoundError('Orders not found')
         }
@@ -40,9 +43,13 @@ async function getOrders(req, res) {
 
 //DELETE ONE ORDER
 async function deleteOrder(req, res) {
+   
     try {
-        const { catid } = req.params;
-        const order = await OrderyModel.findByIdAndRemove(catid);
+        const {orderId} = req.params;
+        const { authorization } = req.headers
+        const tockenUserID = await JWT.verify(authorization, 'shop');
+        
+        const order = await OrderModel.findOneAndRemove({userID:tockenUserID._id,_id:orderId});
         if (!order) {
             throw new NotModifiedError("Can not Delete Order");
         }
@@ -56,9 +63,12 @@ async function deleteOrder(req, res) {
 //UPDATE ONE ORDER
 async function updateOrder(req, res) {
     try {
-        const { catid } = req.params;
+        const { authorization } = req.headers
+        const tockenUserID = await JWT.verify(authorization, 'shop');
+        const { orderId } = req.params;
         const { title } = req.body;
-        const order = await OrderModel.findByIdAndUpdate(catid, { title }, { new: true })
+        
+        const order = await OrderModel.findOneAndUpdate({_id:orderId,userID:tockenUserID._id}, { title }, { new: true })
         if (!order) {
             throw new NotModifiedError("Order data not updated")
         }
@@ -72,12 +82,12 @@ async function updateOrder(req, res) {
 // CREATE ONE ORDER
 async function createOrder(req, res) {
     try {
-        const { autorization } = req.headers
+        const { authorization } = req.headers
 
-        const { _id } = await JWT.verify(autorization, process.env.SECRET);
+        const tockenUserID = await JWT.verify(authorization, 'shop');
 
         const { title, description } = req.body;
-        const order = await OrderModel.create({ title, description, userID: _id });
+        const order = await OrderModel.create({ title, description, userID: tockenUserID._id });
         if (order) {
             ResponceHandler.handleList(res, order)
         }
