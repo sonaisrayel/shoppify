@@ -15,7 +15,8 @@ const productSchema = new Schema({
     category: {
         type: String,
         required: true
-    }
+    },
+    userID: {type: Schema.Types.ObjectId, ref: 'User'}
 })
 
 
